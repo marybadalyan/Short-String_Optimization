@@ -47,13 +47,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
   
-      - name: Install GCC
-        if: matrix.os == 'ubuntu-latest' && matrix.cpp_compiler == 'g++'
-        run: sudo apt update && sudo apt install -y g++ cmake
+      # - name: Install GCC
+      #   if: matrix.os == 'ubuntu-latest' && matrix.cpp_compiler == 'g++'
+      #   run: sudo apt update && sudo apt install -y g++ cmake
 
-      - name: Install Clang
-        if: matrix.os == 'ubuntu-latest' && matrix.cpp_compiler == 'clang++'
-        run: sudo apt update && sudo apt install -y clang cmake
+      # - name: Install Clang
+      #   if: matrix.os == 'ubuntu-latest' && matrix.cpp_compiler == 'clang++'
+      #   run: sudo apt update && sudo apt install -y clang cmake
 
       - name: Set reusable strings
         # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
