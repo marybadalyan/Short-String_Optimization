@@ -44,16 +44,22 @@ int main() {
 
 
     std::string s = "Hi";
-    // to make sure sso is enabled we can check if the actual string address is the same as the str objects adress
+    // to make sure sso is enabled we can check if the actual string address 
+    // is the same as the str objects adress if tey are withig 64 bytes of each other
+    // then SSO is in effect, otherwise it is not.
     
-    
-    std::cout << "String object address: " << &s << "\n";
-    std::cout << "Data (c_str) address:  " << static_cast<const void*>(s.c_str()) << "\n";
+    const void* str_ptr = static_cast<const void*>(s.c_str());
+    const void* obj_ptr = static_cast<const void*>(&s);
 
-    if(&s == static_cast<const void*>(s.c_str())) {
-        std::cout << "SSO is enabled.\n";
+    std::cout << "Object address:   " << obj_ptr << '\n';
+    std::cout << "Data address:     " << str_ptr << '\n';
+
+    ptrdiff_t diff = (char*)str_ptr - (char*)obj_ptr;
+
+    if (std::abs(diff) < 64) {
+        std::cout << "✅ SSO is in effect\n";
     } else {
-        std::cout << "SSO is not enabled.\n";
+        std::cout << "❌ SSO not in effect (heap used)\n";
     }
 
 
